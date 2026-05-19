@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+@theme {
+  --color-royal-blue: #001A4D;
+  --color-royal-blue-lt: #002D80;
+  --color-metallic-gold: #D4AF37;
+  --color-gold-muted: #C5A028;
+  --color-gold-accent: #FFD700;
+  --color-silk-white: #F9FBFD;
+  --color-ivory: #FDFCF8;
+  --color-muted: #6B7280;
+  --color-text: #0A1128;
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "DM Sans", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+@layer base {
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    @apply font-sans bg-ivory text-text antialiased overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer components {
+  .section-heading {
+    @apply text-4xl md:text-6xl font-serif text-royal-blue leading-tight mb-8;
+  }
+
+  .section-heading em {
+    @apply italic text-metallic-gold not-italic;
+  }
+
+  .section-subheading {
+    @apply text-xs uppercase tracking-[0.3em] font-sans text-muted mb-4 block;
+  }
+
+  /* Variant 1: Primary (Gold) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-3 bg-metallic-gold text-white px-10 py-4 font-sans font-bold uppercase tracking-[0.2em] text-[10px] rounded-full shadow-xl hover:bg-gold-muted hover:-translate-y-1 transition-all duration-500 relative overflow-hidden;
+  }
+
+  .btn-primary::after {
+    @apply content-[''] absolute top-0 -left-full w-full h-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-all duration-1000;
+  }
+
+  .btn-primary:hover::after {
+    @apply left-full;
+  }
+
+  /* Variant 2: Secondary (Royal Blue) */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-3 bg-royal-blue text-white px-10 py-4 font-sans font-bold uppercase tracking-[0.2em] text-[10px] rounded-full shadow-xl hover:bg-royal-blue-lt hover:-translate-y-1 transition-all duration-500 relative overflow-hidden;
+  }
+
+  /* Variant 3: Ghost / Outline */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-royal-blue/20 text-royal-blue px-8 py-4 font-sans font-semibold uppercase tracking-widest text-[10px] rounded-full hover:border-metallic-gold hover:text-metallic-gold transition-all duration-300;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2 border border-white/20 text-white/80 px-8 py-4 font-sans font-semibold uppercase tracking-widest text-[10px] rounded-full hover:border-metallic-gold hover:text-metallic-gold transition-all duration-300;
+  }
+
+  /* Variant 4: Text Link Button */
+  .btn-text {
+    @apply inline-flex items-center justify-center gap-2 text-metallic-gold px-6 py-3 font-sans font-bold uppercase tracking-widest text-[10px] rounded-full hover:bg-metallic-gold/10 transition-all duration-300;
+  }
+
+  .royal-card {
+    @apply bg-white border border-ivory shadow-2xl hover:shadow-metallic-gold/5 transition-all duration-500 p-8;
+  }
+
+  .glass-royal {
+    @apply bg-royal-blue/90 backdrop-blur-md border-b border-white/10;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, 15px);
+    opacity: 0;
+  }
+}
+
+@keyframes whatsappPulse {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+
+  40% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* ── Shared utility classes (used across multiple pages) ── */
+.ss-gold-text {
+  background: linear-gradient(90deg, #D4AF37, #F0D060, #C9A227);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ss-gold-border-hover {
+  transition: all 0.5s ease;
+}
+
+.ss-gold-border-hover:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.03);
+}
+
+.ss-image-wrap {
+  overflow: hidden;
+}
+
+.ss-image-wrap img {
+  transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ss-image-wrap:hover img {
+  transform: scale(1.06);
+}
+
+/* ── Footer-specific animations & utilities ── */
+@keyframes ss-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes ss-float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(0.4deg);
+  }
+}
+
+@keyframes ss-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ss-shimmer-bar {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.12) 45%,
+      rgba(212, 175, 55, 0.35) 50%,
+      rgba(212, 175, 55, 0.12) 55%,
+      transparent 100%);
+  background-size: 300% 100%;
+  animation: ss-shimmer 4s linear infinite;
+}
+
+.ss-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px;
+  opacity: 0.022;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ss-link-line {
+  position: relative;
+  display: inline-block;
+}
+
+.ss-link-line::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #D4AF37, #C9A227);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ss-link-line:hover::after {
+  width: 100%;
+}
+
+.ss-social-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ss-social-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.ss-social-btn:hover::before {
+  opacity: 1;
+}
+
+.ss-contact-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.ss-contact-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #D4AF37, transparent);
+  opacity: 0;
+  transform: scaleY(0);
+  transition: opacity 0.3s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.ss-contact-card:hover::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.ss-top-btn {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ss-top-btn:hover {
+  transform: translateY(-3px);
+}
